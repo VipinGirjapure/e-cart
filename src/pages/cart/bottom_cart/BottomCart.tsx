@@ -1,6 +1,6 @@
-import { CheckOutlined } from "@mui/icons-material";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useContext } from "react";
+import CheckoutBtn from "../../../components/button/checkout_btn/CheckoutBtn";
 import { CartContextProvider } from "../../../utils/global_states/cart/CartContext";
 
 const BottomCart = () => {
@@ -79,9 +79,7 @@ const BottomCart = () => {
             },
           }}
         >
-          <Button>
-            Checkout <CheckOutlined />
-          </Button>
+          <CheckoutBtn total={total} />
         </Box>
       </Box>
     </>

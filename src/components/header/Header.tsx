@@ -1,4 +1,4 @@
-import { Avatar, Box, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 
 const Header = () => {
   return (
@@ -93,21 +93,6 @@ const Header = () => {
           >
             contact us
           </Typography>
-          {/* <Box sx={{ display: "flex", alignItems: "center" }}>
-            <Typography
-              sx={{
-                textTransform: "capitalize",
-                marginRight: "5px",
-                fontWeight: "bold",
-              }}
-            >
-              John
-            </Typography>
-            <Avatar
-              alt="user"
-              src="https://mui.com/static/images/avatar/2.jpg"
-            />
-          </Box> */}
         </Box>
       </Box>
     </>

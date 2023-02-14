@@ -1,12 +1,13 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { createContext, useEffect, useState } from "react";
+
+import React, { createContext, useEffect, useState } from "react";
 
 export const CartContextProvider = createContext({});
 const CartContext = ({ children }: any) => {
-  const [cart, setCart]: any = useState([]);
-  const [total, setTotal]: any = useState([]);
+  const [cart, setCart] = useState<any[]>([]);
+  const [total, setTotal] = useState<string>("");
 
-  const handleAddCart = (item: any) => {
+  const handleAddCart: any = (item: any) => {
     const foundData = cart.find((i: any) => i.id === item.id);
     if (!foundData) {
       setCart([...cart, { ...item, quantity: 1 }]);
