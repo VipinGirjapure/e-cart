@@ -7,8 +7,6 @@ interface IProps {
 }
 const CheckoutBtn: React.FC<IProps> = ({ total }) => {
   const Razorpay = useRazorpay();
-  console.log(total);
-
   const handlePayment = useCallback(() => {
     const options: RazorpayOptions = {
       key: "rzp_test_locuRaWt3KL2uf",

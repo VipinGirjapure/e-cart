@@ -11,7 +11,7 @@ const BottomCart = () => {
       <Box
         sx={{
           minHeight: "70px",
-          border: "1px solid black",
+          backgroundColor: "lightgrey",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -22,39 +22,62 @@ const BottomCart = () => {
         <Box
           sx={{
             display: "flex",
-            width: "50%",
-            justifyContent: "space-between",
+            width: "100%",
+            justifyContent: "center",
             textTransform: "uppercase",
+            marginTop: "5px",
           }}
         >
-          <Typography sx={{ fontWeight: "bold" }}>Products</Typography>
-          <Typography sx={{ fontWeight: "bold" }}>Quantity</Typography>
+          <Typography
+            sx={{
+              fontWeight: "bold",
+              backgroundColor: "white",
+              padding: "5px",
+              height: "20px",
+              width: "60px",
+              borderRadius: "15px",
+              textAlign: "center",
+            }}
+          >
+            Cart
+          </Typography>
         </Box>
-        {cart.map((item: any) => {
-          return (
-            <Box
-              sx={{
-                display: "flex",
-                width: "50%",
-                justifyContent: "space-between",
-                borderRadius: "5px",
-              }}
-              key={item.id}
-            >
-              <Typography sx={{ textDecoration: "underline" }}>
-                {item.title}
-              </Typography>
-              <Typography> {item.quantity}</Typography>
-            </Box>
-          );
-        })}
+        <Box
+          sx={{
+            margin: "15px 0",
+            display: "flex",
+            width: "100%",
+            justifyContent: "center",
+            flexDirection: "column",
+            alignItems: "center",
+          }}
+        >
+          {cart.map((item: any) => {
+            return (
+              <Box
+                sx={{
+                  display: "flex",
+                  width: "50%",
+                  justifyContent: "space-between",
+                  borderRadius: "5px",
+                  margin: "5px 0",
+                }}
+                key={item.id}
+              >
+                <Typography sx={{ textDecoration: "underline" }}>
+                  {item.title}
+                </Typography>
+                <Typography>{item.quantity}</Typography>
+              </Box>
+            );
+          })}
+        </Box>
 
         <Box
           sx={{
             display: "flex",
-            width: "100%",
-            justifyContent: "space-around",
-            borderTop: "1px solid black",
+            width: "300px",
+            justifyContent: "space-between",
             padding: "10px 0",
           }}
         >
@@ -62,6 +85,19 @@ const BottomCart = () => {
             Total
           </Typography>
           <Typography>{total} Rs</Typography>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            width: "300px",
+            justifyContent: "space-between",
+            padding: "10px 0",
+          }}
+        >
+          <Typography sx={{ fontWeight: "bold" }} color="primary">
+            with GST
+          </Typography>
+          <Typography>{total + (total * 18) / 100} Rs</Typography>
         </Box>
         <Box
           sx={{
@@ -79,7 +115,8 @@ const BottomCart = () => {
             },
           }}
         >
-          <CheckoutBtn total={total} />
+          {/* @ts-ignore */}
+          <CheckoutBtn total={total + (total * 18) / 100} />
         </Box>
       </Box>
     </>

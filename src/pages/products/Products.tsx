@@ -12,6 +12,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
+  CircularProgress,
   Typography,
 } from "@mui/material";
 import Badge from "@mui/material/Badge";
@@ -67,128 +68,141 @@ const Products = () => {
             padding: "5px 5%",
           }}
         >
-          {products.products?.map((item: any) => {
-            const foundInCart = cart.find((i: any) => i.id === item.id);
+          {products.products && products.length !== 0 ? (
+            products.products.map((item: any) => {
+              const foundInCart = cart.find((i: any) => i.id === item.id);
 
-            return (
-              <Card
-                sx={{
-                  width: 300,
-                  paddingTop: "4px",
-                  margin: "8px",
-                  border: "0.1px solid lightgrey",
-                }}
-                key={item.id}
-              >
-                <CardMedia
+              return (
+                <Card
                   sx={{
-                    height: 140,
-                    backgroundImage: `url(${item.thumbnail})`,
-                    backgroundPosition: "center",
-                    backgroundSize: "contain",
+                    width: 300,
+                    paddingTop: "4px",
+                    margin: "8px",
+                    border: "0.1px solid lightgrey",
                   }}
-                  title="product"
-                  component="div"
-                />
-                <CardContent sx={{ padding: "5px" }}>
-                  <Typography
-                    gutterBottom
-                    textAlign="center"
-                    fontSize="16px"
-                    sx={{ textTransform: "capitalize" }}
-                  >
-                    {item.title}
-                  </Typography>
-                  <Typography
-                    fontSize="14px"
-                    sx={{
-                      color: "grey",
-                      height: "80px",
-                      textTransform: "capitalize",
-                    }}
-                  >
-                    {item.description}
-                  </Typography>
-                  <Typography variant="body2" textAlign="center">
-                    {item.price} Rs.
-                  </Typography>
-                </CardContent>
-                <CardActions
-                  sx={{ display: "flex", justifyContent: "space-between" }}
+                  key={item.id}
                 >
-                  {!foundInCart && (
-                    <Button
-                      size="small"
-                      onClick={() => handleAddCart(item)}
-                      data-testid="addCartBtn"
+                  <CardMedia
+                    sx={{
+                      height: 140,
+                      backgroundImage: `url(${item.thumbnail})`,
+                      backgroundPosition: "center",
+                      backgroundSize: "contain",
+                    }}
+                    title="product"
+                    component="div"
+                  />
+                  <CardContent sx={{ padding: "5px" }}>
+                    <Typography
+                      gutterBottom
+                      textAlign="center"
+                      fontSize="16px"
+                      sx={{ textTransform: "capitalize" }}
                     >
-                      <AddCircle />
-                    </Button>
-                  )}
-                  {foundInCart && (
-                    <Box
+                      {item.title}
+                    </Typography>
+                    <Typography
+                      fontSize="14px"
                       sx={{
-                        width: "150px",
-                        display: "flex",
-                        justifyContent: "space-between",
-                        alignItems: "center",
+                        color: "grey",
+                        height: "80px",
+                        textTransform: "capitalize",
                       }}
                     >
-                      <Button
-                        sx={{
-                          padding: "0",
-                          height: "25px",
-                          width: "25px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          color: "grey",
-                          "& :hover": {
-                            color: "red",
-                            cursor: "pointer",
-                          },
-                        }}
-                        onClick={() => {
-                          foundInCart.quantity !== 1
-                            ? updateCart(item, false)
-                            : removeItem(item);
-                        }}
-                        data-testid="decrQty"
-                      >
-                        <Remove />
-                      </Button>
-                      <Box>{foundInCart.quantity}</Box>
-                      <Button
-                        sx={{
-                          height: "25px",
-                          width: "25px",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          color: "grey",
-                          "& :hover": {
-                            color: "green",
-                            cursor: "pointer",
-                          },
-                        }}
-                        onClick={() => updateCart(item, true)}
-                        data-testid="incrQty"
-                      >
-                        <Add />
-                      </Button>
-                    </Box>
-                  )}
-                  <Button
-                    size="small"
-                    onClick={() => navigate(`/details/${item.id}`)}
-                    data-testid="details"
+                      {item.description}
+                    </Typography>
+                    <Typography variant="body2" textAlign="center">
+                      {item.price} Rs.
+                    </Typography>
+                  </CardContent>
+                  <CardActions
+                    sx={{ display: "flex", justifyContent: "space-between" }}
                   >
-                    <ArrowForwardIos />
-                  </Button>
-                </CardActions>
-              </Card>
-            );
-          })}
+                    {!foundInCart && (
+                      <Button
+                        size="small"
+                        onClick={() => handleAddCart(item)}
+                        data-testid="addCartBtn"
+                      >
+                        <AddCircle />
+                      </Button>
+                    )}
+                    {foundInCart && (
+                      <Box
+                        sx={{
+                          width: "150px",
+                          display: "flex",
+                          justifyContent: "space-between",
+                          alignItems: "center",
+                        }}
+                      >
+                        <Button
+                          sx={{
+                            padding: "0",
+                            height: "25px",
+                            width: "25px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            color: "grey",
+                            "& :hover": {
+                              color: "red",
+                              cursor: "pointer",
+                            },
+                          }}
+                          onClick={() => {
+                            foundInCart.quantity !== 1
+                              ? updateCart(item, false)
+                              : removeItem(item);
+                          }}
+                          data-testid="decrQty"
+                        >
+                          <Remove />
+                        </Button>
+                        <Box>{foundInCart.quantity}</Box>
+                        <Button
+                          sx={{
+                            height: "25px",
+                            width: "25px",
+                            display: "flex",
+                            justifyContent: "center",
+                            alignItems: "center",
+                            color: "grey",
+                            "& :hover": {
+                              color: "green",
+                              cursor: "pointer",
+                            },
+                          }}
+                          onClick={() => updateCart(item, true)}
+                          data-testid="incrQty"
+                        >
+                          <Add />
+                        </Button>
+                      </Box>
+                    )}
+                    <Button
+                      size="small"
+                      onClick={() => navigate(`/details/${item.id}`)}
+                      data-testid="details"
+                    >
+                      <ArrowForwardIos />
+                    </Button>
+                  </CardActions>
+                </Card>
+              );
+            })
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                height: "200px",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <CircularProgress />
+            </Box>
+          )}
         </Box>
       </Box>
       <Box id="bottomCart">
